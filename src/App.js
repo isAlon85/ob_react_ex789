@@ -1,11 +1,12 @@
-import logo from './logo.svg';
 import './App.css';
 import ContactListComponent from './components/container/ContactList';
+import Registerform from './components/pure/forms/RegisterForm';
+import Loginform from './components/pure/forms/LoginForm';
 
 function App() {
   return (
     <div className="App">
-      <ContactListComponent></ContactListComponent>
+      <Loginform></Loginform>
     </div>
   );
 }

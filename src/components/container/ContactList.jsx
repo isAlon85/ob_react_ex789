@@ -44,10 +44,44 @@ function ContactListComponent(props) {
 
     function addContact(contact){
         console.log('Add this contact:', contact);
-        const index = contacts.indexOf(contact);
         const tempContacts = [...contacts];
         tempContacts.push(contact);
         setContacts(tempContacts);
+    }
+
+    const ContactTable = () => {
+        return (
+            <table>
+                <thead>
+                <tr>
+                    <th scope='col'>Name</th>
+                    <th scope='col'>Email</th>
+                    <th scope='col'>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                    { contacts.map((contact, index) => {
+                        return (
+                            <ContactComponent 
+                                key={index} 
+                                contact={contact}
+                                connect={connectContact}
+                                remove={deleteContact}
+                                >
+                            </ContactComponent>
+                        )
+                    } )}
+                </tbody>
+            </table>
+        )
+    }
+
+    let contactsTable;
+
+    if(contacts.length > 0) {
+        contactsTable = <ContactTable></ContactTable>;
+    } else {
+        contactsTable = <h3>There are no contacts stored</h3>;
     }
 
     return (
@@ -62,31 +96,10 @@ function ContactListComponent(props) {
                     </div>
                     {/*Card body*/}
                     <div className='card-body' data-mdb-perfect-scrollbar='true' style={ {position: 'relative', height : '400px'} }>
-                        <table>
-                            <thead>
-                            <tr>
-                                <th scope='col'>Name</th>
-                                <th scope='col'>Email</th>
-                                <th scope='col'>Actions</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                                { contacts.map((contact, index) => {
-                                    return (
-                                        <ContactComponent 
-                                            key={index} 
-                                            contact={contact}
-                                            connect={connectContact}
-                                            remove={deleteContact}
-                                            >
-                                        </ContactComponent>
-                                    )
-                                } )}
-                            </tbody>
-                        </table>
+                        {contactsTable}
                     </div>
                 </div>
-                <Contactform add={addContact}></Contactform>
+                <Contactform add={addContact} length={contacts.length}></Contactform>
             </div>
         </div>
     )

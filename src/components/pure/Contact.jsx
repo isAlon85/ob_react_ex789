@@ -20,7 +20,7 @@ function ContactComponent({ contact, connect, remove }) {
     }
 
     return (
-        <tr className='fw-normal'>
+        <tr className={contact.connected ? 'contact-connected fw-normal' : 'contact-notconnected fw-normal'}>
             <th>
                 <span className='ms-2'>{ contact.name }</span>
             </th>
